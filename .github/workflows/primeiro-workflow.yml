@@ -1,34 +1,38 @@
-name: Pipeline Automática
+name: Automated Pipeline
 
 on:
   push:
     branches:
       - main
       - master
+  workflow_dispatch:
 
 jobs:
-  meu-primeiro-job:
-    name: Executar Pipeline
+  build-and-test:
+    name: Build and Test Pipeline
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout do código
+      - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Configurar Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       
-      - name: Mensagem de sucesso
-        run: echo "Pipeline executada com sucesso!"
+      - name: Display success message
+        run: echo "Pipeline executed successfully!"
       
-      - name: Listar arquivos
+      - name: List project files
         run: ls -la
       
-      - name: Executar script Python
+      - name: Verify Python installation
+        run: python --version
+      
+      - name: Execute Python script
         run: |
-          python --version
-          python -c "print('='*50)"
-          python -c "print('GitHub Actions funcionando!')"
-          python -c "print('='*50)"
+          python -c "print('=' * 50)"
+          python -c "print('GitHub Actions is working!')"
+          python -c "print('=' * 50)"
+          python -c "print('Pipeline completed successfully!')"

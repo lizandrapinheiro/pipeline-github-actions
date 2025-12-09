@@ -1,0 +1,34 @@
+name: Pipeline Automática
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  meu-primeiro-job:
+    name: Executar Pipeline
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+      
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Mensagem de sucesso
+        run: echo "Pipeline executada com sucesso!"
+      
+      - name: Listar arquivos
+        run: ls -la
+      
+      - name: Executar script Python
+        run: |
+          python --version
+          python -c "print('='*50)"
+          python -c "print('GitHub Actions funcionando!')"
+          python -c "print('='*50)"
